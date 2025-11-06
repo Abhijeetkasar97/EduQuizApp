@@ -1,0 +1,48 @@
+type User @table {
+  displayName: String!
+  userType: String!
+  createdAt: Timestamp!
+  email: String
+  photoUrl: String
+  avatarSelection: String
+}
+
+type Quiz @table {
+  title: String!
+  subject: String!
+  difficultyLevel: String!
+  createdAt: Timestamp!
+  description: String
+  public: Boolean
+  totalQuestions: Int
+  creator: User
+}
+
+type Question @table {
+  questionText: String!
+  questionType: String!
+  correctAnswer: String!
+  explanation: String
+  options: [String]
+  quiz: Quiz
+}
+
+type QuizAttempt @table {
+  score: Int!
+  startTime: Timestamp!
+  endTime: Timestamp!
+  createdAt: Timestamp!
+  completed: Boolean
+  totalCorrectAnswers: Int
+  totalIncorrectAnswers: Int
+  student: User
+  quiz: Quiz
+}
+
+type Badge @table {
+  name: String!
+  description: String!
+  imageUrl: String!
+  unlockCondition: String!
+  tier: String
+}

@@ -1,0 +1,55 @@
+mutation CreateDemoData @transaction @auth(level: PUBLIC, insecureReason: "This mutation is safe to expose to the public") {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      displayName: "demouser1",
+	  userType: "student",
+	  createdAt: "2024-04-22T12:00:00Z",
+	  email: "demouser1@example.com"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      displayName: "demouser2",
+	  userType: "teacher",
+	  createdAt: "2024-04-22T12:00:00Z",
+	  email: "demouser2@example.com"
+    }
+  ])
+  quiz_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440000",
+      creatorId: "550e8400-e29b-41d4-a716-446655440000",
+      title: "Demo Quiz 1",
+	  subject: "Math",
+	  difficultyLevel: "Easy",
+	  createdAt: "2024-04-22T12:00:00Z",
+	  public: true
+    },
+    {
+      id: "650e8400-e29b-41d4-a716-446655440001",
+      creatorId: "550e8400-e29b-41d4-a716-446655440001",
+      title: "Demo Quiz 2",
+	  subject: "Science",
+	  difficultyLevel: "Hard",
+	  createdAt: "2024-04-22T12:00:00Z",
+	  public: false
+    }
+  ])
+  question_insertMany(data: [
+    {
+      id: "750e8400-e29b-41d4-a716-446655440000",
+      quizId: "650e8400-e29b-41d4-a716-446655440000",
+      questionText: "What is 1 + 1?",
+	  correctAnswer: "2",
+	  questionType: "multiple choice",
+	  options: ["1", "2", "3", "4"]
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440001",
+      quizId: "650e8400-e29b-41d4-a716-446655440001",
+      questionText: "What is E = mc^2?",
+	  correctAnswer: "energy mass equivalence",
+	  questionType: "short answer",
+    }
+  ])
+}

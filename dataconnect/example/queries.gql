@@ -1,0 +1,49 @@
+mutation CreateNewQuiz($title: String!, $subject: String!, $difficultyLevel: String!, $description: String, $public: Boolean) @auth(level: USER) {
+  quiz_insert(data: {
+    title: $title,
+    subject: $subject,
+    difficultyLevel: $difficultyLevel,
+    description: $description,
+    public: $public,
+    createdAt_expr: "request.time",
+    creatorId_expr: "auth.uid"
+  })
+}
+
+query GetPublicQuizzes @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  quizzes(where: {public: {eq: true}}) {
+    id
+    title
+    subject
+    difficultyLevel
+    description
+  }
+}
+
+mutation StartQuizAttempt($quizId: UUID!) @auth(level: USER) {
+  quizAttempt_insert(data: {
+    quizId: $quizId,
+    studentId_expr: "auth.uid",
+    startTime_expr: "request.time",
+    endTime_expr: "request.time",
+    createdAt_expr: "request.time",
+    completed: false,
+    score: 0,
+    totalCorrectAnswers: 0,
+    totalIncorrectAnswers: 0
+  })
+}
+
+query GetMyQuizAttempts @auth(level: USER) {
+  quizAttempts(where: {studentId: {eq_expr: "auth.uid"}}) {
+    id
+    quiz {
+      id
+      title
+    }
+    startTime
+    endTime
+    score
+    completed
+  }
+}

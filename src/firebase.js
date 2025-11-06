@@ -1,17 +1,21 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL
+  apiKey: "AIzaSyDHznYyKf7Sa1Zj6cFk0RZaQuxMuVv3PY8",
+  authDomain: "eduquizapp-a73cd.firebaseapp.com",
+  databaseURL: "https://eduquizapp-a73cd-default-rtdb.firebaseio.com",
+  projectId: "eduquizapp-a73cd",
+  storageBucket: "eduquizapp-a73cd.firebasestorage.app",
+  messagingSenderId: "370867321587",
+  appId: "1:370867321587:web:826ea486e47770d6a01586",
+  measurementId: "G-08PBVGMKST"
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const database = getDatabase(app);
+export const analytics = getAnalytics(app);
+export default app;
